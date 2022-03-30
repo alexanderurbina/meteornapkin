@@ -43,6 +43,7 @@ Template.Register.events({
 					resetInput()
 					$('#register-modal').modal('close')
 				}
+
 			});
 		} else {
 			Materialize.toast('Please check your information', 4000)
@@ -67,18 +68,18 @@ Template.Register.events({
 	'keyup #registerEmail': function() {
 		// check if email is valid or already exist
 		var input = $('#registerEmail').val()
-		var regex = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@(mail.utoronto.ca)$/;
+		var regex = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@/;
 		if (regex.test(input)) {
 			$('#registerEmail').addClass("valid")
 			$("#registerEmail").removeClass("invalid")
 			Session.set("validEmail", true)
-		} else {
+		} /*else {
 			$("#registerEmail").removeClass("valid")
 			$("#registerEmail").addClass("invalid")
 			$("#registerEmail-label").attr("data-error", 
 				"Invalid Email (@mail.utoronto.ca required)")
 			Session.set("validEmail", false)
-		}
+		} */
 	},
 	'keyup #registerUTORID': function() {
 		var input = $('#registerUTORID').val()
