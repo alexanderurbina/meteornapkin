@@ -43,7 +43,6 @@ Template.Register.events({
 					resetInput()
 					$('#register-modal').modal('close')
 				}
-
 			});
 		} else {
 			Materialize.toast('Please check your information', 4000)
@@ -73,13 +72,13 @@ Template.Register.events({
 			$('#registerEmail').addClass("valid")
 			$("#registerEmail").removeClass("invalid")
 			Session.set("validEmail", true)
-		} /*else {
+		} /* else {
 			$("#registerEmail").removeClass("valid")
 			$("#registerEmail").addClass("invalid")
 			$("#registerEmail-label").attr("data-error", 
 				"Invalid Email (@mail.utoronto.ca required)")
 			Session.set("validEmail", false)
-		} */
+		}*/
 	},
 	'keyup #registerUTORID': function() {
 		var input = $('#registerUTORID').val()

@@ -6,6 +6,10 @@ Template.CourseCard.events({
 		// store the course code and course ID in session
 		Session.set('courseId', this.courseId)
 		$('#remove-course-modal').modal('open')
+	},
+	'click .enroll-modal-trigger': function() {
+		Session.set('courseId', this.courseId)
+		$('#enroll-course-modal').modal('open')
 	}
 });
 
