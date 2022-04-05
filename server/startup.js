@@ -52,7 +52,7 @@ for (i = 1; i <= number; i++) {
 			_id: (utorid + i).toString(),
 			first_name: "Tester",
 			last_name: last,
-			email: "tester" + last + "@mail.utoronto.ca",
+			email: "tester" + last + "@tbi.com",
 			password: "tester" + last,
 			accountType: 'student'
 		}
@@ -71,7 +71,7 @@ for (i = 1; i < 4; i ++) {
 		options = {
 			first_name: 'Instructor',
 			last_name: last,
-			email: 'instructor' + last + "@mail.utoronto.ca",
+			email: 'instructor' + last + "@tbi.com",
 			password: 'instructor' + last,
 			accountType: 'instructor'
 		}
@@ -111,13 +111,13 @@ SeoCollection.update(
 	}, {
 		$set: {
 			route_name : "home",
-			title : "Virtual Classroom",
+			title : "VR University",
 			meta: {
 				'description': 'Utilize affordable 360 cameras and VR headset like Google Cardboard to create a virtual environment',
 				'theme-color': '#2196F3'
 			},
 			og: {
-				'title': 'Virtual Classroom',
+				'title': 'VR University',
 				'description': 'Utilize affordable 360 cameras and VR headset like Google Cardboard to create a virtual environment',
 				'url': 'https://vr.bryanli.xyz',
 				'image': 'https://vr.bryanli.xyz/icons/cardboard.png'
@@ -133,7 +133,7 @@ SeoCollection.update(
 	}, {
 		$set: {
 			route_name : "createNewCourse",
-			title : "Create Course | Virtual Classroom",
+			title : "Create Course | VR University",
 			meta: {
 				'theme-color': '#2196F3'
 			}
@@ -149,7 +149,7 @@ SeoCollection.update(
 	}, {
 		$set: {
 			route_name : "settings",
-			title : "Settings | Virtual Classroom",
+			title : "Settings | VR University",
 			meta: {
 				'theme-color': '#2196F3'
 			}

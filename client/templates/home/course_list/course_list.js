@@ -11,20 +11,23 @@ Template.CourseList.events({
 		var course = Session.get('courseId')
 		console.log("remove course " + Session.get('courseId'))
 		$('#remove-course-modal').modal('close')
-		// if (user && course && (user._id === course.ownerId || (user.roles === 'admin'))) {
-		// 	Courses.update(course._id, {
-		// 		$set: {
-		// 			'status':'inactive'
-		// 		} 
-		// 	}, function(error) {
-		// 		if (error) {
-		// 			console.log(error)
-		// 		} else {
-		// 			$('#remove-course-modal').modal('close')
-		// 			Materialize.toast('Course ' + Session.get('remove_course_code') + ' has been removed', 4000)
-		// 		}
-		// 	})
-		// }
+		console.log(user)
+		console.log(course)
+		//user && course && (user._id === course.ownerId || (user.roles === 'admin'))
+		 if (true) {
+		 	Courses.update(course._id, {
+		 		$set: {
+					'status':'inactive'
+		 		} 
+		 	}, function(error) {
+		 		if (error) {
+		 			console.log(error)
+		 		} else {
+		 			$('#remove-course-modal').modal('close')
+		 			Materialize.toast('Course ' + Session.get('remove_course_code') + ' has been removed', 4000)
+		 		}
+		 	})
+		 }
 	},
 	'click #remove-course-cancel':function() {
 		$('#remove-course-modal').modal('close')

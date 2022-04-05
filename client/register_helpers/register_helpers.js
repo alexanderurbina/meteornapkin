@@ -113,7 +113,9 @@ Template.registerHelper('numberOfEnrolledStudent', function(courseId) {
 
 Template.registerHelper('getLectureYouTubeURL', function(lectureId) {
 	var lecture = Lectures.findOne(lectureId)
-	console.log(lecture)
+	if(lecture.youtube.search('watch?') != -1){
+		lecture.youtube = lecture.youtube.replace(lecture.youtube.substring(lecture.youtube.search('watch?'), (lecture.youtube.search('watch?') + 8)), 'embed/');
+	}
 	if (lecture && lecture.youtube) {
 		return lecture.youtube + "?rel=0&amp;controls=0&amp;showinfo=0"
 	} 
