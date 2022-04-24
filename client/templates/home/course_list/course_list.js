@@ -56,27 +56,27 @@ Template.CourseList.helpers({
 			}
 		}
 	},
-	// unrelatedCourses: function() {
-	// 	// get that are not related to user, or get courses base on search regex
-	// 	var user = Meteor.user()
-	// 	if (user) {
-	// 		if (user && Session.get('search') === '') {
-	// 			return Courses.find({
-	// 				'status': 'active',
-	// 				'instructors': {$not: user._id},
-	// 				'students': {$not: user._id}
-	// 			}, {sort: {'code':1}})
-	// 		} else {
-	// 			var regex = new RegExp(Session.get('search'), 'i')
-	// 			return Courses.find({
-	// 				'code': {$regex: regex},
-	// 				'status': 'active',
-	// 				'instructors': {$not: user._id},
-	// 				'students': {$not: user._id}
-	// 			}, {sort: {'code':1}})
-	// 		}
-	// 	}
-	// },
+	 unrelatedCourses: function() {
+	 	// get that are not related to user, or get courses base on search regex
+	 	var user = Meteor.user()
+	 	if (user) {
+	 		if (user && Session.get('search') === '') {
+	 			return Courses.find({
+	 				'status': 'active',
+	 				'instructors': {$not: user._id},
+	 				'students': {$not: user._id}
+	 			}, {sort: {'code':1}})
+	 		} else {
+	 			var regex = new RegExp(Session.get('search'), 'i')
+	 			return Courses.find({
+	 				'code': {$regex: regex},
+	 				'status': 'active',
+	 				'instructors': {$not: user._id},
+	 				'students': {$not: user._id}
+	 			}, {sort: {'code':1}})
+	 		}
+	 	}
+	 },
 	getSelectedCourseCode: function() {
 		var course = Courses.findOne(Session.get('courseId'))
 		if (course) return course.code

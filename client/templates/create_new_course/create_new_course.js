@@ -42,16 +42,16 @@ Template.CreateNewCourse.events({
                     header: true,
                     complete: function (results, file) {
                         if (results.error) {
-                            Materialize.toast('CSV Parse Error: ' + results.error)
+                            Materialize.toast('CSV Parse Error: ' + results.error, 4000)
                         } else if (results.meta.fields.indexOf('StudentID') < 0 ||
                             results.meta.fields.indexOf('Group') < 0) {
-                            Materialize.toast('Incorrect CSV format')
+                            Materialize.toast('Incorrect CSV format', 4000)
                         } else {
                             Meteor.call('addCourse', courseInfo,
                                 results.data, function (error) {
                                     if (error) console.log(error)
                                     else  {
-                                    	Materialize.toast('Course added and Enrolled Students')
+                                    	Materialize.toast('Course added and Enrolled Students', 4000)
                                         Router.go('/course/' + courseInfo.code)
                                     }
                                 }
