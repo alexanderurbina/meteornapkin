@@ -188,6 +188,21 @@ Meteor.methods({
             })
         }
     },
+
+    'confirmRemoveCourse': function (course) {
+        var user = Meteor.user()			
+		if (user && course && (user._id === course.ownerId || (user.roles === 'admin'))) {
+			Courses.update(course._id, {
+				$set: {
+					status:'inactive'
+				} 
+			}, function(error) {
+				if (error) {
+					console.log(error)
+				}
+			})	
+		}
+    },
     'toggleLecturePermaLink': function (lectureId, youtube) {
         var user = Meteor.user()
         var lecture = Lectures.findOne(lectureId)

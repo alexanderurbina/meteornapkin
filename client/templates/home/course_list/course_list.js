@@ -7,24 +7,14 @@ Template.CourseList.events({
 		Session.set("search", input)
 	},
 	'click #confirm-remove': function() {
-		var user = Meteor.user()
-		var course = Session.get('courseId')
-		console.log("remove course " + Session.get('courseId'))
 		$('#remove-course-modal').modal('close')
-		// if (user && course && (user._id === course.ownerId || (user.roles === 'admin'))) {
-		// 	Courses.update(course._id, {
-		// 		$set: {
-		// 			'status':'inactive'
-		// 		} 
-		// 	}, function(error) {
-		// 		if (error) {
-		// 			console.log(error)
-		// 		} else {
-		// 			$('#remove-course-modal').modal('close')
-		// 			Materialize.toast('Course ' + Session.get('remove_course_code') + ' has been removed', 4000)
-		// 		}
-		// 	})
-		// }
+		Meteor.call('confirmRemoveCourse', 
+		Courses.findOne({code: Session.get('courseCode')}),
+		function (error) {
+			if (error) console.log(error)
+			else  Materialize.toast('Course has been removed', 4000)
+		}
+		);
 	},
 	'click #remove-course-cancel':function() {
 		$('#remove-course-modal').modal('close')
