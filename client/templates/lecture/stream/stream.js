@@ -70,7 +70,7 @@ Template.Stream.events({
 });
 /*****************************************************************************/
 /* Stream: Helpers */
-/*****************************************************************************/
+/*****************************************************************************/ 
 Template.Stream.helpers({
     lecture: function () {
         var lecture = Lectures.findOne(Session.get('lectureId'))
@@ -218,7 +218,7 @@ function createConnection() {
     peerConnection = new RTCMultiConnection()
     console.log(peerConnection)
     console.log('conecction created!')
-    peerConnection.socketURL = 'https://localhost:9001/';
+    peerConnection.socketURL = '/';
     peerConnection.socketMessageEvent = 'audio-conference-demo';
     peerConnection.session = {
         audio: true,
