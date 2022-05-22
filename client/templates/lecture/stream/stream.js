@@ -70,7 +70,7 @@ Template.Stream.events({
 });
 /*****************************************************************************/
 /* Stream: Helpers */
-/*****************************************************************************/
+/*****************************************************************************/ 
 Template.Stream.helpers({
     lecture: function () {
         var lecture = Lectures.findOne(Session.get('lectureId'))
@@ -143,7 +143,7 @@ Template.Stream.helpers({
 });
 
 function voiceChat() {
-    if (!phone) {
+  //  if (!phone) {
         var pubnub = PubNub.findOne()
         phone = window.phone = PHONE({
             number: Meteor.userId(),
@@ -152,7 +152,7 @@ function voiceChat() {
             media: {audio: true, video: false},
             ssl: true
         })
-
+        console.log(phone)
         phone.unable(function () {
             console.log("Your device does not support RTCPeerConnection!");
             Materialize.toast('Your device does not support RTCPeerConnection', 4000)
@@ -184,7 +184,7 @@ function voiceChat() {
                 if (source) audio.removeChild(source)
             })
         })
-    }
+   // }
 }
 
 function callMembers() {
@@ -218,7 +218,7 @@ function createConnection() {
     peerConnection = new RTCMultiConnection()
     console.log(peerConnection)
     console.log('conecction created!')
-    peerConnection.socketURL = 'https://localhost:9001/';
+    peerConnection.socketURL = '/';
     peerConnection.socketMessageEvent = 'audio-conference-demo';
     peerConnection.session = {
         audio: true,
@@ -316,6 +316,7 @@ Template.Stream.onRendered(function () {
         if (peerConnection == null) {
             console.log('going to create conecction.')
             createConnection()
+            voiceChat()
             console.log(peerConnection)
         }
         if (connections[groupid] == null) {
