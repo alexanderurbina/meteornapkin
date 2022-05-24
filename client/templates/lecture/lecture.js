@@ -186,7 +186,7 @@ function instructorNotification() {
                 var title = Router.current().params.lecture
                 var options = {
                     body: 'You have ' + questions.count() + ' new questions!',
-                    icon: "/icons/cardboard.png"
+                    icon: "/icons/icon.png"
                 }
                 new Notification(title, options)
                 Meteor.call('notifiedAudioQuestion', lecture._id, questions.fetch())
