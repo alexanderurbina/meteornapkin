@@ -1,6 +1,6 @@
 var peers = {}
-var phone = false
-var currentRoomId = null
+var phone = false  // why is this here
+var currentRoomId = null 
 connections = {}
 peerConnection = null
 groupid = null;
