@@ -134,11 +134,10 @@ Template.registerHelper('getLectureYouTubeURL', function(lectureId) {
 
 Template.registerHelper('getLectureYouTubeURL2', function(lectureId) {
 	var lecture = Lectures.findOne(lectureId)
-	console.log(lectureId)
-	console.log(lecture.youtube)
 	if (lecture && lecture.youtube) {
-		var splitURL =  lecture.youtube.split("watch?v=")
-		return splitURL[0] + "embed/" + splitURL[1]	
+		var splitURL =  lecture.youtube.split("watch?v=");
+		var videoId = splitURL[1].split("&ab_channel");
+		return splitURL[0] + "embed/" + videoId[0] + "?rel=0&amp;controls=0&amp;showinfo=0";
 	}
 })
 

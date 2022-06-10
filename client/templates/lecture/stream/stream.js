@@ -36,8 +36,8 @@ Template.Stream.events({
     'click .enter-group-discussion': function (event) {
     },
     'click #exit-group-discussion': function () {
-        console.log(peerConnection)
-        console.log(peerConnection.getAllParticipants())
+       //console.log(peerConnection)
+       //console.log(peerConnection.getAllParticipants())
         let moderatorShifted = false
         if (peerConnection.getAllParticipants().length == 0) {
             peerConnection.closeEntireSession(function () {
@@ -53,8 +53,8 @@ Template.Stream.events({
             peerConnection.getAllParticipants().forEach(function (participantId) {
                 if (peerConnection.userid == peerConnection.sessionid && moderatorShifted == false) {
                     peerConnection.shiftModerationControl(participantId, peerConnection.broadcasters, false);
-                    console.log(peerConnection.broadcasters)
-                    console.log("Moderator requesting shift to " + participantId);
+                    //console.log(peerConnection.broadcasters)
+                    //console.log("Moderator requesting shift to " + participantId);
                     moderatorShifted = true;
                 }
                 peerConnection.disconnectWith(participantId);
@@ -101,7 +101,7 @@ Template.Stream.helpers({
     },
     getGroupMembers: function () {
         var group = Groups.findOne(Session.get('groupId'))
-        console.log(group)
+        //console.log(group)
         if (group) {
             var members = group.members
             members.splice(members.indexOf(Meteor.userId()), 1)
@@ -143,7 +143,7 @@ Template.Stream.helpers({
 });
 
 function voiceChat() {
-    if (!phone) {
+  //  if (!phone) {
         var pubnub = PubNub.findOne()
         phone = window.phone = PHONE({
             number: Meteor.userId(),
@@ -152,7 +152,7 @@ function voiceChat() {
             media: {audio: true, video: false},
             ssl: true
         })
-
+        console.log(phone)
         phone.unable(function () {
             console.log("Your device does not support RTCPeerConnection!");
             Materialize.toast('Your device does not support RTCPeerConnection', 4000)
@@ -184,40 +184,42 @@ function voiceChat() {
                 if (source) audio.removeChild(source)
             })
         })
-    }
+   // }
 }
 
 function callMembers() {
-    if (phone) {
+  //  if (phone) {
         var group = Groups.findOne(Session.get('groupId'))
         if (group) {
             for (var i = 0; i < group.members.length; i++) {
                 if (group.members[i] != Meteor.userId())
                     phone.dial(group.members[i])
             }
+            console.log(group)
         }
-    }
+ //   }
 }
 
 function voiceCallEnd() {
-    if (phone) phone.hangup()
+   // if (phone)
+    phone.hangup()
     peers = {}
     var audio = document.getElementById('voiceChat')
     if (audio) audio.innerHTML = ''
 }
 
 function voiceCallTerminate() {
-    if (phone) {
+  //  if (phone) {
         phone.camera.stop()
         phone = false
-    }
+  //  }
 }
 
 function createConnection() {
-    console.log('entry to create conecction')
+    //console.log('entry to create conecction')
     peerConnection = new RTCMultiConnection()
     console.log(peerConnection)
-    console.log('conecction created!')
+    //console.log('conecction created!')
     peerConnection.socketURL = '/';
     peerConnection.socketMessageEvent = 'audio-conference-demo';
     peerConnection.session = {
@@ -237,11 +239,11 @@ function createConnection() {
         console.log('WebRTC chat opened!');
     };
     peerConnection.onShiftedModerationControl = function (sender, existingBroadcasters) {
-        console.log("Moderator has been shifted to " + sender);
+        //console.log("Moderator has been shifted to " + sender);
         // peerConnection
         peerConnection.disconnectWith(sender);
         peerConnection.acceptModerationControl(sender, existingBroadcasters);
-        console.log(peerConnection)
+        //console.log(peerConnection)
     };
     peerConnection.onUserStatusChanged = function (event) {
         var isOnline = event.status === 'online';
@@ -291,7 +293,7 @@ Template.Stream.onCreated(function () {
 });
 
 Template.Stream.onRendered(function () {
-    console.log('this item has been created')
+    //console.log('this item has been created')
     var courseCode = Router.current().params.code
     var title = Router.current().params.lecture
     var lecture = Lectures.findOne({$and: [{title: title}, {courseCode: courseCode}]})
@@ -307,16 +309,17 @@ Template.Stream.onRendered(function () {
         $('#recorder-modal').modal()
     }, 50)
     document.documentElement.style.overflow = "hidden"
-    console.log(lecture)
+    //console.log(lecture)
     // variables to textarea update timer
     var typingTimer
     Session.set('typingTimer', typingTimer)
     Session.set('typingInterval', 5000)
     if (lecture.mode == 'group') {
         if (peerConnection == null) {
-            console.log('going to create conecction.')
+            //console.log('going to create conecction.')
             createConnection()
-            console.log(peerConnection)
+            voiceChat()
+            //console.log(peerConnection)
         }
         if (connections[groupid] == null) {
             enterGroupStreamRoom(groupid)

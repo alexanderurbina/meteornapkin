@@ -109,16 +109,16 @@ SeoCollection.update(
 	}, {
 		$set: {
 			route_name : "home",
-			title : "VR University",
+			title : "SimuSim",
 			meta: {
 				'description': 'Utilize affordable 360 cameras and VR headset like Google Cardboard to create a virtual environment',
 				'theme-color': '#2196F3'
 			},
 			og: {
-				'title': 'VR University',
+				'title': 'SimuSim',
 				'description': 'Utilize affordable 360 cameras and VR headset like Google Cardboard to create a virtual environment',
 				'url': 'https://vr.bryanli.xyz',
-				'image': 'https://vr.bryanli.xyz/icons/cardboard.png'
+				'image': 'https://vr.bryanli.xyz/icons/icon.png'
 			}
 		}
 	}, {
@@ -131,7 +131,7 @@ SeoCollection.update(
 	}, {
 		$set: {
 			route_name : "createNewCourse",
-			title : "Create Course | VR University",
+			title : "Create Course | SimuSim",
 			meta: {
 				'theme-color': '#2196F3'
 			}
@@ -147,7 +147,7 @@ SeoCollection.update(
 	}, {
 		$set: {
 			route_name : "settings",
-			title : "Settings | VR University",
+			title : "Settings | SimuSim",
 			meta: {
 				'theme-color': '#2196F3'
 			}
