@@ -3,18 +3,21 @@ import {audioLevel} from './audio-meter'
 let blob = []
 let transcript = 'Unable to transcript audio'
 let confidence = 0
-let average_confidence = 0;
+let average_confidence = 0; 
 
 /*****************************************************************************/
 /* Recorder: Event Handlers */
 /*****************************************************************************/
 Template.Recorder.events({
     'click #recorder-toggle': function () {
+        console.log("recorder don toggle on click")
         if (Session.get('state') == 'inactive') {
             Session.set('audioURL', false)
+            console.log("recorder on state inactive event")
             resetTranscriptConfidence()
             recorder()
         }
+       
     },
     'click #recorder-submit': function () {
         if (Session.get('state') == 'inactive' && (Session.get('audioURL')
@@ -115,20 +118,29 @@ function recorder() {
                     if (event.results[i].isFinal) {
                         transcript += event.results[i][0].transcript;
                         confidence += event.results[i][0].confidence;
+                        console.log("confidence event: "+confidence)
+                        console.log("event result length: "+event.results.length)
                         let new_confidence = confidence / event.results.length;
                         average_confidence = new_confidence
+                        console.log("averge confidence: "+average_confidence)
+                        Session.set('av_confidence', average_confidence);
                         document.getElementById("recorder-confidence").innerHTML = "Average Confidence: " +
                             (new_confidence * 100).toFixed(2) + "%"
                     } else {
                         interim_transcript += event.results[i][0].transcript;
                     }
                 }
-
+                Session.set('av_confidence', average_confidence);
+                console.log(average_confidence)
                 document.getElementById("textBox").value = transcript + interim_transcript
             }
             $('#recorder-toggle').click(function () {
                 if (recorder.state != 'inactive') {
-                    recorder.close()
+                    //recorder.close()
+                    recorder.stop()
+                }
+                else {
+                    recorder.start()
                 }
             })
             $('#recorder-cancel').click(function () {
@@ -142,6 +154,9 @@ function recorder() {
 
 function uploadAudio() {
     console.log(blob)
+    console.log("average_confidence on function upload audio")
+    console.log(Session.get('av_confidence'))
+
     var lecture = Lectures.findOne(Session.get('lectureId'))
     var upload = Audios.insert({
         file: blob,
@@ -151,7 +166,7 @@ function uploadAudio() {
             lectureId: lecture._id,
             groupId: Session.get('groundId'),
             transcript: transcript,
-            confidence: average_confidence,
+            confidence: Session.get('av_confidence'),
             mode: lecture.mode,
             read: false,
             notified: false

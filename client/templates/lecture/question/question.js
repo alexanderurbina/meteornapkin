@@ -31,6 +31,8 @@ Template.Question.helpers({
 		return Audios.findOne(this.question)
 	},
 	getPercentage: function(value) {
+		console.log("From Question js")
+		console.log(value)
 		return value.toFixed(2) * 100 + "%"
 	},
 	changePlayerIcon: function() {
