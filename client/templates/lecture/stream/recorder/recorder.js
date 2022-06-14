@@ -20,27 +20,43 @@ Template.Recorder.events({
        
     },
     'click #recorder-submit': function () {
+        // 
         if (Session.get('state') == 'inactive' && (Session.get('audioURL')
             && document.getElementById("textBox").value != "")) {
             setAudioSessions(false, false, null, false)
-            resetTranscriptConfidence()
             uploadAudio()
+            resetTranscriptConfidence()
+
             $('#recorder-modal').modal('close')
-        } else if (Session.get('state') == 'inactive' && (Session.get('audioURL')
+        } 
+        //
+        else if (Session.get('state') == 'inactive' && (Session.get('audioURL')
             && document.getElementById("textBox").value == "")) {
             setAudioSessions(false, false, null, false)
-            resetTranscriptConfidence()
             uploadAudio()
+            resetTranscriptConfidence()
+
             $('#recorder-modal').modal('close')
-        } else if (Session.get('state') == 'recording') {
+        } 
+        //
+        else if (Session.get('state') == 'recording') {
             Materialize.toast('Please press the recorder button to stop recording.', 4000)
-        } else if (document.getElementById("textBox").value != "") {
+        } 
+        //
+        else if (document.getElementById("textBox").value != "") {
             //TODO: Have to implement system where user can submit a typed answer
+            recorder()
+            uploadAudio()
+            setAudioSessions(false, false, null, false)
             resetTranscriptConfidence()
             Materialize.toast('Message Sent!', 4000)
-        } else if (document.getElementById("textBox").value == "") {
+        } 
+        
+        else if (document.getElementById("textBox").value == "") {
             Materialize.toast('Please press the recorder button to record a question, or manually type a question.', 4000)
-        } else {
+        } 
+        
+        else {
             Materialize.toast('Unable to record, please try again.', 4000)
         }
     },
@@ -100,7 +116,7 @@ function recorder() {
                 console.log("Recorder server has available data")
                 // add stream data to chunks
                 chunks.push(event.data)
-                // if recorder is 'inactive' then recording has finished
+                // if recorder is 'inactive' then recording has finished                
                 if (recorder.state == 'inactive') {
                     blob = new Blob(chunks, {type: 'audio/webm'})
                     var time = new Date().getTime()
@@ -156,22 +172,24 @@ function uploadAudio() {
     console.log(blob)
     console.log("average_confidence on function upload audio")
     console.log(Session.get('av_confidence'))
-
+    console.log(document.getElementById('textBox').value);
     var lecture = Lectures.findOne(Session.get('lectureId'))
     var upload = Audios.insert({
-        file: blob,
+        file: blob ? blob : null,
         streams: 'dynamic',
         chunkSize: 'dynamic',
         meta: {
             lectureId: lecture._id,
             groupId: Session.get('groundId'),
-            transcript: transcript,
+            transcript: document.getElementById('textBox').value,
             confidence: Session.get('av_confidence'),
             mode: lecture.mode,
             read: false,
             notified: false
         }
     }, false)
+
+    console.log(upload)
     upload.on('end', function (error, fileObj) {
         if (error) {
             alert('Error during upload: ' + error.reason)

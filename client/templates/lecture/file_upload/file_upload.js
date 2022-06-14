@@ -57,16 +57,17 @@ Template.FileUpload.events({
 					}
 				})
 				//empty fileName field & upload field
-				$('#fileName').val("")
-				$('#file-path-input').val('')
-				$('#lecture-file-upload-modal').modal('close')
+				// $('#fileName').val("")
+				// $('#file-path-input').val('')
+				// $('#lecture-file-upload-modal').modal('close')
 			}
-		} else {
-			$('#fileName').removeClass("validate")
-			$('#fileName').removeClass("valid")
-			$('#fileName').addClass("invalid")
-			$("#fileName-label").attr("data-error", "Please select a file first")
-		}
+		 } 
+	//	else {
+		// 	$('#fileName').removeClass("validate")
+		// 	$('#fileName').removeClass("valid")
+		// 	$('#fileName').addClass("invalid")
+		// 	$("#fileName-label").attr("data-error", "Please select a file first")
+		// }
 	}
 });
 
