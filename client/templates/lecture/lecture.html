@@ -1,3 +1,12 @@
+<head>
+    <meta charset="utf-8">
+    <title>Networked-Aframe Example — naf-uws-adapter</title>
+    <meta name="description" content="Dev Example — naf-uws-adapter">
+    <script src="https://aframe.io/releases/0.7.0/aframe.min.js"></script>
+    <script src="https://unpkg.com/aframe-randomizer-components@^3.0.1/dist/aframe-randomizer-components.min.js"></script>
+    <script src="https://unpkg.com/aframe-particle-system-component@1.0.5/dist/aframe-particle-system-component.min.js"></script>
+</head>
+
 <template name="Lecture">
     <div class="main">
         <div class="innerMain lecture">
@@ -33,11 +42,12 @@
                                     <label id="youtubeURL-label" for="youtubeURL" class={{activeYouTubeInputField
                                             lecture.youtube}}>YouTube URL</label>
                                 </div>
+
                             {{/if}}
                             {{#if canViewLecture}}
                                 {{#if lecture.youtube}}
                                      <div class="video-container">
-                                         <iframe width="560" height="315" src={{getLectureYouTubeURL2 lecture._id}} frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+                                         <iframe width="100%" height="100%" src={{getLectureYouTubeURL2 lecture._id}} frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                                      	<!--<video width=960 height=540 id="video" controls autoplay>-->
                                      		<!--<source src="http://localhost:80/live/lstest-lec2/index.m3u8" type="application/x-shockwave-flash">-->
                                      	<!--</video>-->                                                                                                                                                
@@ -50,12 +60,21 @@
                             {{/if}}
                         </div>
                         {{#if lecture.active}}
-                            <div class="card-action">
-                                {{#if groupIsActive}}
-                                {{else}}
-                                    <a href="/course/{{lecture.courseCode}}/{{lecture.title}}/stream"
-                                       class="waves-effect waves-teal btn-flat">Enter Stream</a>
-                                {{/if}}
+                           
+                            <div class="a-enter-vr" aframe-injected="">
+                                
+                               
+                                    <div class="card-action">
+                                        {{#if groupIsActive}}
+                                        {{else}}
+                                        <button class="a-enter-vr-button" title="Enter VR mode with a headset or fullscreen mode on a desktop. Visit https://webvr.rocks or https://webvr.info for more information." aframe-injected="">
+                                            <a href="/course/{{lecture.courseCode}}/{{lecture.title}}/stream"
+                                               class="waves-effect waves-teal btn-flat">Enter Stream</a>
+                                            </button>       
+                                        {{/if}}
+                                    </div>
+                                
+                            
                             </div>
                         {{/if}}
                     </div>
