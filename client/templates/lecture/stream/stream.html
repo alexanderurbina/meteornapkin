@@ -49,10 +49,9 @@
             {{else}}
                 {{#if lecture.youtube}}
                     <div class="video-container" style="width:100%;height:100vh">
-                        <!--<iframe src={{getLectureYouTubeURL2 lecture._id}} frameborder="0" allowfullscreen></iframe>-->
-                        <iframe width="100%" height="100%" src={{getLectureYouTubeURL2 lecture._id}} frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen 
-                                         style="position: absolute;top: 0;
-                                         left: 0;"></iframe>
+                        <button class="a-enter-vr-button" title="Enter VR mode with a headset or fullscreen mode on a desktop. Visit https://webvr.rocks or https://webvr.info for more information." aframe-injected="">
+                        <iframe src={{getLectureYouTubeURL2 lecture._id}} frameborder="0" allowfullscreen></iframe>
+                        </button>
                     </div>
                 {{else}}
                     <div class="valign-wrapper" style="height:100vh"><h3 style="margin:0 auto;">YouTube stream not
@@ -65,7 +64,6 @@
                 <button data-target="group-discussion-modal" id="group-discussion-modal-trigger"
                             class="modal-trigger waves-light btn-flat overlay-btn-right"><img src="/icons/memo.svg"></button>
             {{else}}
-                <a href="/course/{{lecture.courseCode}}/{{lecture.title}}" id="exit-group-discussion" class="waves-light btn-flat overlay-btn-left">EXIT</a>
                 <button data-target="recorder-modal" id="recorder-modal-trigger"
                         class="modal-trigger waves-light btn-flat overlay-btn-right"><img src="/icons/stop.svg"></button>
             {{/if}}
@@ -81,6 +79,9 @@
                             </div>
                         </div>
                         <div class="modal-footer">
+                            <button class="waves-effect waves-teal modal-action btn-flat" type="button"
+                                    id="group-discussion-modal-submit">Submit
+                            </button>
                             <button class="waves-effect waves-teal modal-action btn-flat" type="button"
                                     id="group-discussion-modal-close">Close
                             </button>
