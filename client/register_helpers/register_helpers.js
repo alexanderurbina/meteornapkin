@@ -137,7 +137,7 @@ Template.registerHelper('getLectureYouTubeURL2', function(lectureId) {
 	if (lecture && lecture.youtube) {
 		var splitURL =  lecture.youtube.split("watch?v=");
 		var videoId = splitURL[1].split("&ab_channel");
-		return splitURL[0] + "embed/" + videoId[0];
+		return splitURL[0] + "embed/" + videoId[0] + "?rel=0&amp;controls=0&amp;showinfo=0";
 	}
 })
 
