@@ -1,9 +1,10 @@
 <template name="Recorder">
 	<div class="recorder">
-		<p>Please record your question</p>
+		<p>Please click the icon below <br> to <strong>type</strong> or <strong>record</strong> your question. <br>
+		Click the icon again when finished.</p>
 		<form class="recorder-form">
 			<button id="recorder-toggle" class="waves-effect waves-light btn-flat" type="button">
-				<img class="{{#if isRecording}}active-blink{{/if}}" src="/icons/mic.svg">
+				<img class="{{#if isRecording}}active-blink{{/if}}" src="/icons/edit.gif">
 			</button>
 			{{#if getAudioLevel}}<p>Audio Level: {{getAudioLevel}}</p>{{/if}}
 			{{#if showPlayer}}

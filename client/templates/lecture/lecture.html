@@ -54,8 +54,10 @@
                                 {{#if groupIsActive}}
                                 {{else}}
                                     <a href="/course/{{lecture.courseCode}}/{{lecture.title}}/stream"
-                                       class="waves-effect waves-teal btn-flat">Enter Stream</a>
-                                {{/if}}
+                                       class="waves-effect waves-teal btn-flat">Enter Stream</a> <!-- the enter stream for a live lecture -->
+                                       
+                                   
+                                       {{/if}}
                             </div>
                         {{/if}}
                     </div>
@@ -135,7 +137,8 @@
                                         <div class="card-action"><a
                                                 href="/course/{{lecture.courseCode}}/{{lecture.title}}/stream"
                                                 data-value={{group._id}} class="enter-group-stream waves-effect
-                                                waves-teal btn-flat">Enter Stream</a></div>
+                                                waves-teal btn-flat">Enter Stream</a></div>  <!-- the enter stream for group -->
+                                                
                                     {{/if}}
                                 </li>
                             {{/each}}

@@ -48,8 +48,8 @@
                 </a-scene>
             {{else}}
                 {{#if lecture.youtube}}
-                    <div class="video-container" style="width:100%;height:100vh">
-                        <iframe src={{getLectureYouTubeURL2 lecture._id}} frameborder="0" allowfullscreen></iframe>
+                    <div class="video-container">
+                        <iframe src={{getLectureYouTubeURL2 lecture._id}} frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                     </div>
                 {{else}}
                     <div class="valign-wrapper" style="height:100vh"><h3 style="margin:0 auto;">YouTube stream not
@@ -62,8 +62,12 @@
                 <button data-target="group-discussion-modal" id="group-discussion-modal-trigger"
                             class="modal-trigger waves-light btn-flat overlay-btn-right"><img src="/icons/memo.svg"></button>
             {{else}}
-                <button data-target="recorder-modal" id="recorder-modal-trigger"
-                        class="modal-trigger waves-light btn-flat overlay-btn-right"><img src="/icons/stop.svg"></button>
+
+            <button data-target="recorder-modal" id="recorder-modal-trigger"
+                                       class="modal-trigger waves-light btn-flat overlay-btn-right"><img src="/icons/stop.svg"></button> 
+                <!-- here we had a button about vr  -->
+
+                <button class="modal-trigger waves-light btn-flat overlay-btn-right2"><img src="/icons/vr.png"></button>        
             {{/if}}
             <div id="group-discussion-modal" class="modal">
                     <form class="group-discussion-form">
