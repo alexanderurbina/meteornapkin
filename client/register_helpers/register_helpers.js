@@ -132,12 +132,30 @@ Template.registerHelper('getLectureYouTubeURL', function(lectureId) {
 	if (lecture && lecture.youtube) return lecture.youtube + "?rel=0&amp;controls=0&amp;showinfo=0"
 })
 
-Template.registerHelper('getLectureYouTubeURL2', function(lectureId) {
-	var lecture = Lectures.findOne(lectureId)
+Template.registerHelper('getLectureYouTubeURL2', function (lectureId) {
+	var lecture = Lectures.findOne(lectureId);
+	var youtubeUrl = '';
 	if (lecture && lecture.youtube) {
-		var splitURL =  lecture.youtube.split("watch?v=");
-		var videoId = splitURL[1].split("&ab_channel");
-		return splitURL[0] + "embed/" + videoId[0] + "?rel=0&amp;controls=0&amp;showinfo=0";
+		if (lecture.youtube.includes('watch?v=')) {
+			var splitURL = lecture.youtube.split("watch?v=");
+			if (lecture.youtube.includes('&')) {
+				var videoId = splitURL[1].substring(0, splitURL[1].indexOf('&'));
+				youtubeUrl = splitURL[0] + "embed/" + videoId;
+			} else {
+				youtubeUrl = splitURL[0] + "embed/" + splitURL[1];
+			}
+		} else if (lecture.youtube.includes('embed')) {
+			youtubeUrl = lecture.youtube;
+		} else if (lecture.youtube.includes('youtu.be')) {
+			if (lecture.youtube.includes('&')) {
+				var videoId = splitURL[1].substring(0, splitURL[1].indexOf('&'));
+				youtubeUrl = 'https://www.youtube.com/embed/' + videoId;
+			} else {
+				var splitURL = lecture.youtube.split("youtu.be/");
+				youtubeUrl = 'https://www.youtube.com/embed/' + splitURL[1];
+			}
+		}
+		return youtubeUrl + "?rel=1&amp;controls=1&amp;showinfo=1";
 	}
 })
 
