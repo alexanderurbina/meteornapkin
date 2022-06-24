@@ -455,7 +455,7 @@ Meteor.methods({
     'updateGroupDiscussion': function (groupId, discussion) {
         var user = Meteor.user()
         var group = Groups.findOne(groupId)
-        if (user && group && user._id === group.leader) {
+        if (user && group && user._id === group.creator) {
             Groups.update(groupId, {
                 $set: {
                     discussion: discussion
