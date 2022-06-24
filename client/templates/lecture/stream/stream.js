@@ -45,6 +45,7 @@ Template.Stream.events({
             });
             peerConnection.closeSocket()
             console.log("Socket closed!")
+            currentRoomId = null
             peerConnection.attachStreams.forEach(function (localStream) {
                 localStream.stop();
             });
