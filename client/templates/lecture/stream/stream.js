@@ -14,21 +14,21 @@ Template.Stream.events({
         Session.set('audioURL', false)
         document.getElementById("recorder-confidence").innerHTML = "Average Confidence: 0.00%"
         document.getElementById("textBox").value = ""
-        Template.$('#recorder-modal').modal('open')
+        $('#recorder-modal').modal('open')
     },
     'click #group-discussion-modal-trigger': function () {
-        Template.$('#group-discussion-modal').modal('open')
+        $('#group-discussion-modal').modal('open')
     },
     'click #group-discussion-modal-close': function () {
-        Template.$('#group-discussion-modal').modal('close')
+        $('#group-discussion-modal').modal('close')
     },
     'keyup #group-discussion-textarea': function () {
         // update discussion every 5 seconds after keyup
         clearTimeout(Session.get('typingTimer'))
         if ($('#group-discussion-textarea').val()) {
             typingTimer = setTimeout(function () {
-                Meteor.call('updateGroupDiscussion', peerConnection.sessionid,
-                    Template.$('#group-discussion-textarea').val())
+                Meteor.call('updateGroupDiscussion', currentRoomId,
+                    $('#group-discussion-textarea').val())
             }, Session.get('typingInterval'))
             Session.set('typingTimer', typingTimer)
         }
@@ -131,8 +131,9 @@ Template.Stream.helpers({
     },
     userCanEditDiscussion: function () {
         var user = Meteor.user()
-        var group = currentRoomId
-        if (user && group && user._id !== group.leader) return 'disabled'
+        var groupId = currentRoomId
+        var group = Groups.findOne(groupId)
+        if (user && group && user._id !== group.creator) return 'disabled'
     },
     groupDiscussion: function () {
         var discussion = GroupDiscussion.find({
@@ -328,9 +329,11 @@ Template.Stream.onRendered(function () {
             reEnterGroupStreamRoom(groupid)
         }
     }
+    // aframeInit();
 });
 
 Template.Stream.onDestroyed(function () {
     document.documentElement.style.overflow = "auto"
+    // Session.set('groupId', false)
 });
 
