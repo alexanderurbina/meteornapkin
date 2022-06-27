@@ -1,9 +1,10 @@
-var peers = {}
-var phone = false
-var currentRoomId = null
-connections = {}
-peerConnection = null
-groupid = null;
+import { Pano } from 'vue-vr'
+
+export default {
+    components: {
+        Pano
+    }
+}
 // Hack https://github.com/socketio/socket.io-client/issues/961
 /*****************************************************************************/
 /* Stream: Event Handlers */

@@ -6,7 +6,10 @@
   <script src="https://unpkg.com/aframe-randomizer-components@^3.0.1/dist/aframe-randomizer-components.min.js"></script>
   <script
     src="https://unpkg.com/aframe-particle-system-component@1.0.5/dist/aframe-particle-system-component.min.js"></script>
-</head>
+  <script src="https://d1jlf623bx36qa.cloudfront.net/api/sketchfab-viewer-1.0.0.js"></script>
+  </head>
+
+  
 <template name="Stream">
   <div class="stream">
     {{#with lecture}}
@@ -45,10 +48,18 @@
     {{else}}
     {{#if lecture.youtube}}
     <div class="video-container">
+      <!-- not in vr -->
       <iframe src={{getLectureYouTubeURL2 lecture._id}} frameborder="0"
-        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-        allowfullscreen></iframe>
-    </div>
+        id="api-frame" allowfullscreen mozallowfullscreen="true" webkitallowfullscreen="true"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"></iframe>
+   <!-- in vr -->
+   <Pano
+        @on-load="onLoad"
+        type='video'
+        source={{getLectureYouTubeURL2 lecture._id}}>
+    </Pano>
+   
+      </div>
     {{else}}
     <div class="valign-wrapper" style="height:100vh">
       <h3 style="margin:0 auto;">YouTube stream not
@@ -66,9 +77,10 @@
 
     <button data-target="recorder-modal" id="recorder-modal-trigger"
       class="modal-trigger waves-light btn-flat overlay-btn-right"><img src="/icons/stop.svg"></button>
-    <!-- here we had a button about vr  -->
-
-    <button class="modal-trigger waves-light btn-flat overlay-btn-right2"><img src="/icons/vr-new.png"></button>
+    <!-- here we had a button about vr  
+    <button id="api-frame" class="modal-trigger waves-light btn-flat overlay-btn-right2">
+      <img src="/icons/vr-new.png"> -->
+    </button>
     {{/if}}
     <div id="group-discussion-modal" class="modal">
       <form class="group-discussion-form">
