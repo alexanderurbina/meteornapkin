@@ -14,8 +14,6 @@ COPY package* ./
 
 #RUN npm install
 
-RUN npm install --save vue-vr
-
 COPY . ./
 
 RUN chmod -R 700 /usr/src/app/.meteor
