@@ -48,22 +48,20 @@
     {{else}}
     {{#if lecture.youtube}}
     <div class="video-container">
-      <!-- not in vr -->
-      <iframe src={{getLectureYouTubeURL2 lecture._id}} frameborder="0"
+      <!-- not in vr {{getLectureYouTubeURL2 lecture._id}}-->
+      <iframe src="./vr_video.html" frameborder="0"
         id="api-frame" allowfullscreen mozallowfullscreen="true" webkitallowfullscreen="true"
         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"></iframe>
-   <!-- in vr -->
-   <Pano
-        @on-load="onLoad"
-        type='video'
-        source={{getLectureYouTubeURL2 lecture._id}}>
-    </Pano>
+  
    
       </div>
     {{else}}
     <div class="valign-wrapper" style="height:100vh">
-      <h3 style="margin:0 auto;">YouTube stream not
-        available.</h3>
+      <!-- <h3 style="margin:0 auto;">YouTube stream not
+        available.</h3> -->
+        <iframe src="./vr_video.html" frameborder="0"
+        id="api-frame" allowfullscreen mozallowfullscreen="true" webkitallowfullscreen="true"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"></iframe>
     </div>
     {{/if}}
     {{/if}}
@@ -80,7 +78,7 @@
     <!-- here we had a button about vr  
     <button id="api-frame" class="modal-trigger waves-light btn-flat overlay-btn-right2">
       <img src="/icons/vr-new.png"> -->
-    </button>
+
     {{/if}}
     <div id="group-discussion-modal" class="modal">
       <form class="group-discussion-form">
