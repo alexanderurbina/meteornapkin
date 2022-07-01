@@ -28,10 +28,10 @@
                             <div class="card-title">{{#if lecture.active}}Live{{else}}Offline{{/if}}</div>
                             {{#if userIsCourseInstructor lecture.courseCode}}
                                 <div class="input-field">
-                                    <!-- <input id="youtubeURL" name="youtubeURL" type="text" class="validate"
+                                    <!----> <input id="youtubeURL" name="youtubeURL" type="text" class="validate"
                                            autocomplete="off" value={{lecture.youtube}}  readonly="{{#if lecture.available}}readonly{{/if}}" >
                                     <label id="youtubeURL-label" for="youtubeURL" class={{activeYouTubeInputField
-                                            lecture.youtube}}>YouTube URL</label> -->
+                                            lecture.youtube}}>YouTube URL</label> 
                                 </div>
                             {{/if}}
                             {{#if canViewLecture}}
