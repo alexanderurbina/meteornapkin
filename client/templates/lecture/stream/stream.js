@@ -1,10 +1,10 @@
-import { Pano } from 'vue-vr'
+/*import { Pano } from 'vue-vr'
 
 export default {
     components: {
         Pano
     }
-}
+}*/
 // Hack https://github.com/socketio/socket.io-client/issues/961
 /*****************************************************************************/
 /* Stream: Event Handlers */
