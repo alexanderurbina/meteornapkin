@@ -23,14 +23,16 @@ Template.Recorder.events({
         if (Session.get('state') == 'inactive' && (Session.get('audioURL')
             && document.getElementById("textBox").value != "")) {
             setAudioSessions(false, false, null, false)
-            resetTranscriptConfidence()
+
             uploadAudio()
+            resetTranscriptConfidence()
             $('#recorder-modal').modal('close')
         } else if (Session.get('state') == 'inactive' && (Session.get('audioURL')
             && document.getElementById("textBox").value == "")) {
             setAudioSessions(false, false, null, false)
-            resetTranscriptConfidence()
+
             uploadAudio()
+            resetTranscriptConfidence()
             $('#recorder-modal').modal('close')
         } else if (Session.get('state') == 'recording') {
             Materialize.toast('Please press the recorder button to stop recording.', 4000)
@@ -156,7 +158,8 @@ function uploadAudio() {
     console.log(blob)
     console.log("average_confidence on function upload audio")
     console.log(Session.get('av_confidence'))
-
+    console.log(document.getElementById('textBox'))
+    console.log(document.getElementById("textBox").value)
     var lecture = Lectures.findOne(Session.get('lectureId'))
     var upload = Audios.insert({
         file: blob,
@@ -165,7 +168,7 @@ function uploadAudio() {
         meta: {
             lectureId: lecture._id,
             groupId: Session.get('groundId'),
-            transcript: transcript,
+            transcript: document.getElementById("textBox").value,
             confidence: Session.get('av_confidence'),
             mode: lecture.mode,
             read: false,
