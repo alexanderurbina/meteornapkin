@@ -63,12 +63,13 @@
     <button data-target="group-discussion-modal" id="group-discussion-modal-trigger"
       class="modal-trigger waves-light btn-flat overlay-btn-right"><img src="/icons/memo.svg"></button>
     {{else}}
-
+    <a href="/course/{{lecture.courseCode}}/{{lecture.title}}" id="exit-group-discussion"
+      class="waves-light btn-flat overlay-btn-left">EXIT</a>
     <button data-target="recorder-modal" id="recorder-modal-trigger"
       class="modal-trigger waves-light btn-flat overlay-btn-right"><img src="/icons/stop.svg"></button>
-    <!-- here we had a button about vr  -->
+    <!-- here we had a button about vr  
 
-    <button class="modal-trigger waves-light btn-flat overlay-btn-right2"><img src="/icons/vr-new.png"></button>
+    <button class="modal-trigger waves-light btn-flat overlay-btn-right2"><img src="/icons/vr-new.png"></button>-->
     {{/if}}
     <div id="group-discussion-modal" class="modal">
       <form class="group-discussion-form">
